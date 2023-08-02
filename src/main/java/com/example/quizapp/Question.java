@@ -1,9 +1,6 @@
 package com.example.quizapp;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -11,7 +8,8 @@ import lombok.Data;
 public class Question {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "q1_0_0.Id")
     private Integer Id;
     private String questionTitle;
     private String option1;
@@ -20,4 +18,5 @@ public class Question {
     private String option4;
     private String rightAnswer;
     private String difficultylevel;
+    private String category;
 }
