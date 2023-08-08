@@ -3,14 +3,16 @@ package com.example.quizapp.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Entity
+@Table(name = "question")
 public class Question {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "q1_0_0.Id")
-    private Integer Id;
+    private Integer id;
     private String questionTitle;
     private String option1;
     private String option2;
@@ -19,4 +21,12 @@ public class Question {
     private String rightAnswer;
     private String difficultylevel;
     private String category;
+
+    public String getdifficultylevel() {
+        return difficultylevel;
+    }
+
+    public void setdifficultylevel(String difficultyLevel) {
+        this.difficultylevel = difficultyLevel;
+    }
 }
