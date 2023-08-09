@@ -3,8 +3,11 @@ package com.example.quizapp.service;
 import com.example.quizapp.model.Question;
 import com.example.quizapp.dao.QuestionDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,19 +18,32 @@ public class QuestionService {
     private boolean questionTitle;
     private boolean option1;
 
-    public List<Question> getAllQuestions() {
-
-//
-        return questionDao.findAll();
+    public ResponseEntity<List<Question>> getAllQuestions() {
+        try{
+            return new ResponseEntity<>(questionDao.findAll(), HttpStatus.OK);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
     }
 
-    public Optional<Question> getQuestionsById(Integer id) {
-        return questionDao.findById(id);
+    public ResponseEntity<List<Question>> getQuestionsByCategory(String category) {
+        try{
+            return new ResponseEntity<>(questionDao.findByCategory(category), HttpStatus.OK);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
     }
 
-    public String addQuestion(Question question) {
-        questionDao.save(question);
-        return "Success";
+    public ResponseEntity<String> addQuestion(Question question) {
+        try {
+            questionDao.save(question);
+            return new ResponseEntity<>("Success", HttpStatus.CREATED);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>("errorMessage", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     public String updateQuestion(Integer id, Question updatedQuestion) {
@@ -60,14 +76,13 @@ public class QuestionService {
 
     public boolean deleteQuestion(Integer id){
         try{
-            questionDao.deleteById(id);
+            questionDao.deleteById(id) ;
             return true;
         }
         catch(Exception e){
             return false;
         }
     }
-
 }
 
 
