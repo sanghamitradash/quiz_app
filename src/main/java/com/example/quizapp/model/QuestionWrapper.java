@@ -1,5 +1,8 @@
 package com.example.quizapp.model;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class QuestionWrapper {
     private Integer id;
     private String questionTitle;
