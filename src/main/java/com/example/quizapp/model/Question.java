@@ -7,26 +7,20 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "question")
+@Table(name = "questions")
 public class Question {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name="subject_id")
+    private Subject subject;
+
     private String questionTitle;
-    private String option1;
-    private String option2;
-    private String option3;
-    private String option4;
+    private List<String> options;
     private String rightAnswer;
-    private String difficultylevel;
-    private String category;
+    private Integer marks;
 
-    public String getdifficultylevel() {
-        return difficultylevel;
-    }
-
-    public void setdifficultylevel(String difficultyLevel) {
-        this.difficultylevel = difficultyLevel;
-    }
 }
