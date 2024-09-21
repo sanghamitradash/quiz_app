@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Manage Subjects</title>
+  <link rel="stylesheet" th:href="@{/css/manageSubjects.css}">
+</head>
+<body>
+<h2>Manage Subjects</h2>
+
+<table>
+  <thead>
+  <tr>
+    <th>Subject Name</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="subject : ${subjects}">
+    <td th:text="${subject.subjectName}"></td>
+    <td>
+      <a th:href="@{'/updateSubject/' + ${subject.id}}">Edit</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<form th:action="@{/addSubjects}" method="post">
+  <label>Subject Name</label>
+  <input type="text" name="subjectName"/>
+  <button type="submit">Add Subject</button>
+</form>
+</body>
+</html>

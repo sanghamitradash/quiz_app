@@ -10,13 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.ResponseErrorHandler;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/teacher")
 @PreAuthorize("hasRole('TEACHER')")
 public class TeacherController {
@@ -31,10 +32,10 @@ public class TeacherController {
     StudentMarksService StudentMarksService;
 
     @GetMapping("/manageSubjects")
-    public ResponseEntity<List<Subject>> getAllSubjects(Model model){
+    public String getAllSubjects(Model model){
         List<Subject> subjects = subjectService.getAllSubjects();
         model.addAttribute("subjects", subjects);
-        return ResponseEntity.ok(subjects);
+        return "manageSubjects";
     }
 
     @PostMapping("/addSubjects")
@@ -50,10 +51,10 @@ public class TeacherController {
     }
 
     @GetMapping("/manageQuestions")
-    public ResponseEntity<List<Question>> getAllQuestions(Model model){
+    public String getAllQuestions(Model model){
         List<Question> questions = questionService.getAllQuestions();
-        model.addAttribute("manageQuestions");
-        return ResponseEntity.ok(questions);
+        model.addAttribute("questions");
+        return "manageQuestions";
     }
 
     @PostMapping("/addQuestions")

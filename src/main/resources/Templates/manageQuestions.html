@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Manage Questions</title>
+  <link rel="stylesheet" th:href="@{/css/manageQuestions.css}">
+</head>
+<body>
+<h2>Manage Questions</h2>
+
+<table>
+  <thead>
+  <tr>
+    <th>Question Title</th>
+    <th>Options</th>
+    <th>Correct Answer</th>
+    <th>Marks</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="question : ${questions}">
+    <td th:text="${question.questionTitle}"></td>
+    <td th:each="option : ${question.options}" th:text="${option}"></td>
+    <td th:text="${question.rightAnswer}"></td>
+    <td th:text="${question.marks}"></td>
+    <td>
+      <a th:href="@{'/updateQuestions/' + ${question.id}}">Edit</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<form th:action="@{/addQuestions}" method="post">
+  <label>Question Title</label>
+  <input type="text" name="questionTitle"/>
+
+  <label>Options</label>
+  <input type="text" name="options"/> <!-- Add JavaScript for dynamic fields if needed -->
+
+  <label>Correct Answer</label>
+  <input type="text" name="rightAnswer"/>
+
+  <label>Marks</label>
+  <input type="number" name="marks"/>
+
+  <button type="submit">Add Question</button>
+</form>
+</body>
+</html>

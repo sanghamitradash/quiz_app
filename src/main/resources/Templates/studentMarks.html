@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Student Marks</title>
+  <link rel="stylesheet" th:href="@{/css/studentMarks.css}">
+</head>
+<body>
+<h2>Student Marks</h2>
+
+<table>
+  <thead>
+  <tr>
+    <th>Student Name</th>
+    <th>Marks</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="studentMark : ${studentMarks}">
+    <td th:text="${studentMark.studentName}"></td>
+    <td th:text="${studentMark.marks}"></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
