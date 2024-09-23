@@ -14,4 +14,6 @@ public interface QuestionService {
     void addQuestion(Question question);
 
     void updateQuestion(Long id, Question updatedQuestion);
+
+    List<Question> getQuestionsBySubjectId(Long subjectId);
 }

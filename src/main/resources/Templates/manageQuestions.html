@@ -18,9 +18,17 @@
   </tr>
   </thead>
   <tbody>
+  <tr th:if="${#lists.isEmpty(questions)}">
+    <td colspan="5">No questions available</td>
+  </tr>
   <tr th:each="question : ${questions}">
     <td th:text="${question.questionTitle}"></td>
-    <td th:each="option : ${question.options}" th:text="${option}"></td>
+    <td>
+      <ul>
+        <li th:each="option : ${question.options}" th:text="${option}"></li>
+      </ul>
+    </td>
+
     <td th:text="${question.rightAnswer}"></td>
     <td th:text="${question.marks}"></td>
     <td>

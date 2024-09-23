@@ -1,33 +1,26 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Manage Subjects</title>
-  <link rel="stylesheet" th:href="@{/css/manageSubjects.css}">
+  <title>Teacher Subjects</title>
 </head>
 <body>
-<h2>Manage Subjects</h2>
+<h2>Select a Subject to Manage</h2>
 
-<table>
-  <thead>
-  <tr>
-    <th>Subject Name</th>
-    <th>Actions</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:each="subject : ${subjects}">
-    <td th:text="${subject.subjectName}"></td>
-    <td>
-      <a th:href="@{'/updateSubject/' + ${subject.id}}">Edit</a>
-    </td>
-  </tr>
-  </tbody>
-</table>
+<ul>
+  <li th:each="subject : ${subjects}">
+    <a th:href="@{'/teacher/getQuestionsBySubject/' + ${subject.id}}" th:text="${subject.subjectName}"></a>
+    <!-- Button to edit the subject
+    <a th:href="@{'/teacher/editSubject/' + ${subject.id}}">Edit</a>-->
+  </li>
+</ul>
 
-<form th:action="@{/addSubjects}" method="post">
-  <label>Subject Name</label>
-  <input type="text" name="subjectName"/>
+<!-- Form to add a new subject -->
+<h3>Add New Subject</h3>
+<form th:action="@{/teacher/addSubject}" method="post">
+  <label>Subject Name:</label>
+  <input type="text" name="name"/>
   <button type="submit">Add Subject</button>
 </form>
+
 </body>
 </html>

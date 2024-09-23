@@ -35,4 +35,9 @@ public class QuestionServiceImpl implements QuestionService {
 
         questionRepository.save(existingQuestion);
     }
+
+    @Override
+    public List<Question> getQuestionsBySubjectId(Long subjectId) {
+        return questionRepository.findBySubjectId(subjectId);
+    }
 }

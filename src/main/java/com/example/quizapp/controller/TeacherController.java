@@ -31,7 +31,7 @@ public class TeacherController {
     @Autowired
     StudentMarksService StudentMarksService;
 
-    @GetMapping("/manageSubjects")
+    @GetMapping("/getAllSubjects")
     public String getAllSubjects(Model model){
         List<Subject> subjects = subjectService.getAllSubjects();
         model.addAttribute("subjects", subjects);
@@ -50,10 +50,18 @@ public class TeacherController {
         return ResponseEntity.ok("Subject updated successfully");
     }
 
-    @GetMapping("/manageQuestions")
+    @GetMapping("/getQuestions")
     public String getAllQuestions(Model model){
         List<Question> questions = questionService.getAllQuestions();
-        model.addAttribute("questions");
+        model.addAttribute("questions", questions);
+        return "manageQuestions";
+    }
+
+    @GetMapping("/getQuestionsBySubject/{subjectId}")
+    public String getQuestionsBySubject(@PathVariable Long subjectId, Model model){
+        List<Question> questions = questionService.getQuestionsBySubjectId(subjectId);
+        model.addAttribute("questions", questions);
+        model.addAttribute("subjectId", subjectId); // To keep track of the selected subject
         return "manageQuestions";
     }
 
